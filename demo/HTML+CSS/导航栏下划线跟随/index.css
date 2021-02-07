@@ -1,0 +1,39 @@
+.nav-list, .nav-list-item {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-list {
+    overflow: hidden;
+}
+
+    .nav-list-item {
+        position: relative;
+        float: left;
+    }
+
+    .nav-list-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 100%;
+        width: 0;
+        border-bottom: 1px solid #000;
+        transition: all .3s;
+        transition-delay: .1s;
+    }
+
+        .nav-list-item:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .nav-list-item:hover ~ .nav-list-item::after {
+            left: 0
+        }
+
+        .nav-list-item-link {
+            display: block;
+            padding: 5px 20px;
+        }
