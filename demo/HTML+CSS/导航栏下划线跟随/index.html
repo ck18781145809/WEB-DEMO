@@ -5,8 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>导航栏下划线跟随</title>
-    <link rel="stylesheet" href="../../../lib/bootstrap-4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="index.css">
+    <style>
+        .nav-list, .nav-list-item {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-list {
+            overflow: hidden;
+        }
+
+            .nav-list-item {
+                position: relative;
+                float: left;
+            }
+
+            .nav-list-item::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 100%;
+                width: 0;
+                border-bottom: 1px solid #000;
+                transition: all .3s;
+                transition-delay: .1s;
+            }
+
+                .nav-list-item:hover::after {
+                    width: 100%;
+                    left: 0;
+                }
+
+                .nav-list-item:hover ~ .nav-list-item::after {
+                    left: 0
+                }
+
+                .nav-list-item-link {
+                    display: block;
+                    padding: 5px 20px;
+                }
+    </style>
 </head>
 <body>
     <h1>效果</h1>
@@ -30,8 +70,5 @@
             </li>
         </ul>
     </nav>
-
-    <script src="../../../lib/jquery-3.5.1/jquery.3.5.1.min.js"></script>
-    <script src="../../../lib/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 </body>
 </html>
