@@ -52,7 +52,7 @@
                 <a class="nav-list-item-link" href="javascript: void(0);">标题4</a>
             </li>
             <li class="nav-list-item">
-                <a class="nav-list-item-link" href="javascript: void(0);">标题5</a>
+                <a class="nav-list-item-link" href="javascript: void(0);">标题5标题5</a>
             </li>
             <li class="nav-list-underline"></li>
         </ul>
@@ -116,7 +116,13 @@
                     $navListUnderline,
                     {
                         left: itm.offsetLeft,
-                        duration: 0.3
+                        width: itm.getBoundingClientRect().width,
+                        duration: 0.3,
+                        onComplete: () => {
+                            $navListUnderline.style.left = itm.offsetLeft + 'px';
+                            $navListUnderline.style.width = itm.getBoundingClientRect().width + 'px';
+                            $navListUnderline.style.opacity = 1;
+                        }
                     },
                 )
             }
