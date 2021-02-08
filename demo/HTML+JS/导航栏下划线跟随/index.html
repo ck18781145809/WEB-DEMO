@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>【J$】导航栏下划线跟随</title>
+    <style>
+        .nav-list, .nav-list-item {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-list {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .nav-list-item {
+                float: left;
+            }
+
+            .nav-list-underline {
+                position: absolute;
+                bottom: 0;
+                border-bottom: 2px solid #000;
+                opacity: 0;
+            }
+
+                .nav-list-item-link {
+                    display: block;
+                    padding: 5px 20px;
+                }
+    </style>
+</head>
+<body>
+    <h1>效果</h1>
+
+    <nav class="nav">
+        <ul class="nav-list">
+            <li class="nav-list-item">
+                <a class="nav-list-item-link" href="javascript: void(0);">标题1</a>
+            </li>
+            <li class="nav-list-item">
+                <a class="nav-list-item-link" href="javascript: void(0);">标题2</a>
+            </li>
+            <li class="nav-list-item">
+                <a class="nav-list-item-link" href="javascript: void(0);">标题3</a>
+            </li>
+            <li class="nav-list-item">
+                <a class="nav-list-item-link" href="javascript: void(0);">标题4</a>
+            </li>
+            <li class="nav-list-item">
+                <a class="nav-list-item-link" href="javascript: void(0);">标题5</a>
+            </li>
+            <li class="nav-list-underline"></li>
+        </ul>
+    </nav>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+    <script class="">
+        const $navList = document.querySelector('.nav-list');
+        const $navListItems = document.querySelectorAll('.nav-list-item');
+        const $navListUnderline = document.querySelector('.nav-list-underline');
+        let firstEnter = true;
+        let underLineStatus = {};
+
+        $navList.onmouseleave = e => {
+            firstEnter = true;
+
+            gsap.to(
+                $navListUnderline,
+                {
+                    opacity: 0,
+                    duration: .3
+                },
+            )
+        }
+
+        Array.from($navListItems).forEach(itm => {
+            itm.onmouseenter = (e) => {
+                if (firstEnter) {
+                    gsap.fromTo(
+                        $navListUnderline,
+                        {
+                            left: itm.offsetLeft + e.offsetX,
+                            width: 0,
+                            opacity: 1,
+                        },
+                        {
+                            left: itm.offsetLeft,
+                            width: itm.getBoundingClientRect().width,
+                            duration: .3,
+                            onComplete: () => {
+                                $navListUnderline.style.left = itm.offsetLeft + 'px';
+                                $navListUnderline.style.width = itm.getBoundingClientRect().width + 'px';
+                                $navListUnderline.style.opacity = 1;
+                            }
+                        }
+                    )
+
+                    firstEnter = false;
+
+                    return;
+                }
+
+                gsap.to(
+                    $navListUnderline,
+                    {
+                        left: itm.offsetLeft,
+                        duration: 0.3
+                    },
+                )
+            }
+        })
+    </script>
+</body>
+</html>
