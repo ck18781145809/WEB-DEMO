@@ -58,7 +58,14 @@
         </ul>
     </nav>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script> -->
+    <script id="insert">
+        const gasp = document.createElement('script');
+        gasp.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js';
+
+        document.querySelector('#insert').insertAdjacentElement('afterend', gasp);
+    </script>
+
     <script>
         const $navList = document.querySelector('.nav-list');
         const $navListItems = document.querySelectorAll('.nav-list-item');
